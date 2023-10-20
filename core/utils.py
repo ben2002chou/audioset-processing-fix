@@ -1,5 +1,4 @@
 # This file creates and populates a directory with clips for specified class(es) of Audio Set
-# Works on pre-downloaded files. Doesn't download new files
 # Input arguments:
 #       - class labels
 #       - CSV file of dataset
@@ -13,7 +12,7 @@ from shutil import copyfile
 # defaults
 DEFAULT_LABEL_FILE = '../data/class_labels_indices.csv'
 DEFAULT_CSV_DATASET = '../data/unbalanced_train_segments.csv'
-DEFAULT_DEST_DIR = '../output/'
+DEFAULT_DEST_DIR = '/grand/EVITA/ben/AudioSet'
 DEFAULT_FS = 16000
 
 
@@ -48,10 +47,8 @@ def download(class_name, args):
 
         for row in reader:
             # print command for debugging
-            print("ffmpeg -ss " + str(row[1]) + " -t 10 -i $(youtube-dl -f 'bestaudio' -g https://www.youtube.com/watch?v=" +
-                       str(row[0]) + ") -ar " + str(DEFAULT_FS) + " -- \"" + dst_dir + "/" + str(row[0]) + "_" + row[1] + ".wav\"")
-            os.system(("ffmpeg -ss " + str(row[1]) + " -t 10 -i $(youtube-dl -f 'bestaudio' -g https://www.youtube.com/watch?v=" +
-                       str(row[0]) + ") -ar " + str(DEFAULT_FS) + " -- \"" + dst_dir + "/" + str(row[0]) + "_" + row[1] + ".wav\""))
+            print(f"ffmpeg -ss {row[1]} -t 10 -i $(yt-dlp -f 'best' -g https://www.youtube.com/watch?v={row[0]}) -ar {DEFAULT_FS} -y \"{dst_dir}/{row[0]}_{row[1]}.mp4\"")
+            os.system(f"ffmpeg -ss {row[1]} -t 10 -i $(yt-dlp -f 'best' -g https://www.youtube.com/watch?v={row[0]}) -ar {DEFAULT_FS} -y \"{dst_dir}/{row[0]}_{row[1]}.mp4\"")
 
 
 def create_csv(class_name, args):
