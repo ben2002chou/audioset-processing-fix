@@ -5,7 +5,7 @@
 
 import argparse
 import os
-import core.utils as utils
+import core.utils_exp as utils
 
 
 def find(args):
@@ -78,8 +78,8 @@ if __name__ == '__main__':
 
     parser.set_defaults(
         label_file='./data/class_labels_indices.csv',
-        csv_dataset='./data/balanced_train_segments.csv',
-        destination_dir='/grand/EVITA/ben/AudioSet/balanced/videos',
+        csv_dataset='./data/unbalanced_train_segments.csv',
+        destination_dir='/grand/EVITA/ben/AudioSet/unbalanced/videos',
         exp_dir='/grand/EVITA/ben/AudioSet/videos',
         fs=16000
     )
@@ -99,10 +99,12 @@ if __name__ == '__main__':
     elif args.mode == 'download-all':
         if args.destination_dir is not None and not os.path.isdir(args.destination_dir):
             os.makedirs(args.destination_dir)
-        download_all(args, 5517)
+        download_all(args, 0)
 
     elif args.mode == 'download-all-multithreaded':
         if args.destination_dir is not None and not os.path.isdir(args.destination_dir):
             os.makedirs(args.exp_dir)
         download_all_multithreaded(args, 4550)
+
+#ffmpeg -ss 0 -t 10 -i $(yt-dlp -f 'b' -g https://www.youtube.com/watch?v=--4gqARaEJE) -ar 16000 -y "/grand/EVITA/ben/AudioSet/eval/videos/--4gqARaEJE.mp4"
 

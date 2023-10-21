@@ -11,7 +11,7 @@ from shutil import copyfile
 
 # defaults
 DEFAULT_LABEL_FILE = '../data/class_labels_indices.csv'
-DEFAULT_CSV_DATASET = '../data/balanced_train_segments.csv'
+DEFAULT_CSV_DATASET = '../data/unbalanced_train_segments.csv'
 DEFAULT_DEST_DIR = '/grand/EVITA/ben/AudioSet/videos'
 DEFAULT_FS = 16000
 
@@ -52,8 +52,8 @@ def download_all_multithreaded(args, start_from_row_n):
                 continue
             yt_id, start_seconds, end_seconds, _ = row  # extract the necessary data from each row
             # print command for debugging
-            print(f"ffmpeg -ss {start_seconds} -t {int(float(end_seconds)) - int(float(start_seconds))} -i $(yt-dlp -N 4 -f 'b' -g https://www.youtube.com/watch?v={yt_id}) -ar {DEFAULT_FS} -y \"{dst_dir_root}/{yt_id}.mp4\"")
-            os.system(f"ffmpeg -ss {start_seconds} -t {int(float(end_seconds)) - int(float(start_seconds))} -i $(yt-dlp -N 4 -f 'b' -g https://www.youtube.com/watch?v={yt_id}) -ar {DEFAULT_FS} -y \"{dst_dir_root}/{yt_id}.mp4\"")
+            print(f"ffmpeg -ss {start_seconds} -t {int(float(end_seconds)) - int(float(start_seconds))} -i $(yt-dlp -N 64 -f 'b' -g https://www.youtube.com/watch?v={yt_id}) -ar {DEFAULT_FS} -y \"{dst_dir_root}/{yt_id}.mp4\"")
+            os.system(f"ffmpeg -ss {start_seconds} -t {int(float(end_seconds)) - int(float(start_seconds))} -i $(yt-dlp -N 64 -f 'b' -g https://www.youtube.com/watch?v={yt_id}) -ar {DEFAULT_FS} -y \"{dst_dir_root}/{yt_id}.mp4\"")
 
 
 def download_all(args, start_from_row_n):
