@@ -30,9 +30,9 @@ def find(class_name, args):
     find_files(youtube_ids, args.audio_data_dir, dst_dir_path)  # Find all files in audio_data_dir which are in the list of YouTube IDs
     
     
-def download_all_multithreaded(args, start_from_row_n):
+def download_all_multithreaded(args, start_from_row_n, offset):
     # construct path to destination dir
-    dst_dir_root = args.exp_dir if args.exp_dir is not None else DEFAULT_DEST_DIR
+    dst_dir_root = args.destination_dir if args.exp_dir is not None else DEFAULT_DEST_DIR
 
     print("dst_dir: " + dst_dir_root)
 
@@ -50,10 +50,12 @@ def download_all_multithreaded(args, start_from_row_n):
         for index, row in enumerate(reader, 1):  # start the index from 1
             if index < start_from_row_n:  # if the row index is less than n, skip
                 continue
+            if (index - start_from_row_n) % 10 != offset:  # distribute rows among instances
+                continue
             yt_id, start_seconds, end_seconds, _ = row  # extract the necessary data from each row
             # print command for debugging
-            print(f"ffmpeg -ss {start_seconds} -t {int(float(end_seconds)) - int(float(start_seconds))} -i $(yt-dlp -N 64 -f 'b' -g https://www.youtube.com/watch?v={yt_id}) -ar {DEFAULT_FS} -y \"{dst_dir_root}/{yt_id}.mp4\"")
-            os.system(f"ffmpeg -ss {start_seconds} -t {int(float(end_seconds)) - int(float(start_seconds))} -i $(yt-dlp -N 64 -f 'b' -g https://www.youtube.com/watch?v={yt_id}) -ar {DEFAULT_FS} -y \"{dst_dir_root}/{yt_id}.mp4\"")
+            print(f"ffmpeg -ss {start_seconds} -t {int(float(end_seconds)) - int(float(start_seconds))} -i $(yt-dlp -N 8 -f 'b' -g https://www.youtube.com/watch?v={yt_id}) -ar {DEFAULT_FS} -y \"{dst_dir_root}/{yt_id}.mp4\"")
+            os.system(f"ffmpeg -ss {start_seconds} -t {int(float(end_seconds)) - int(float(start_seconds))} -i $(yt-dlp -N 8 -f 'b' -g https://www.youtube.com/watch?v={yt_id}) -ar {DEFAULT_FS} -y \"{dst_dir_root}/{yt_id}.mp4\"")
 
 
 def download_all(args, start_from_row_n):

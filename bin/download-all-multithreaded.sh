@@ -5,7 +5,7 @@ module load conda
 conda activate youtubedl
 cd /home/ben2002chou/code/audioset-processing-fix
 # Run your Python script within the activated environment
-python3 process.py download-all-multithreaded
+python3 process_unbalanced.py download-all-multithreaded --offset 0 
 conda deactivate
 cd /home/ben2002chou/code/cav-mae
 source cavmae1017/bin/activate
@@ -14,8 +14,8 @@ cd /home/ben2002chou/code/cav-mae/src/preprocess
 
 python3 create_csv.py
 
-python extract_video_frame.py -input_file_list ../../data/video_path.csv -target_fold /grand/EVITA/ben/AudioSet/video_frames 
-python extract_audio.py -input_file_list ../../data/video_path.csv -target_fold /grand/EVITA/ben/AudioSet/audio_samples 
+python extract_video_frame.py -input_file_list ../../data/video_path.csv -target_fold /grand/EVITA/ben/AudioSet/unbalanced/video_frames 
+python extract_audio.py -input_file_list ../../data/video_path.csv -target_fold /grand/EVITA/ben/AudioSet/unbalanced/audio_samples 
 
 # Deactivate the Conda environment once the script completes
 conda deactivate
