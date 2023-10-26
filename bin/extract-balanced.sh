@@ -1,5 +1,5 @@
 #!/bin/bash
-deactivate
+
 module load conda
 cd /home/ben2002chou/code/cav-mae
 source cavmae1017/bin/activate

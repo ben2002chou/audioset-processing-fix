@@ -52,10 +52,14 @@ def download_all_multithreaded(args, start_from_row_n, offset):
                 continue
             if (index - start_from_row_n) % 10 != offset:  # distribute rows among instances
                 continue
-            yt_id, start_seconds, end_seconds, _ = row  # extract the necessary data from each row
+            yt_id = row[0]
+            start_seconds = row[1]
+            end_seconds = row[2]
+            print(f'yt_id: {yt_id}, start_seconds: {start_seconds}, end_seconds: {end_seconds}')
+            # extract the necessary data from each row
             # print command for debugging
-            print(f"ffmpeg -ss {start_seconds} -t {int(float(end_seconds)) - int(float(start_seconds))} -i $(yt-dlp -N 8 -f 'b' -g https://www.youtube.com/watch?v={yt_id}) -ar {DEFAULT_FS} -y \"{dst_dir_root}/{yt_id}.mp4\"")
-            os.system(f"ffmpeg -ss {start_seconds} -t {int(float(end_seconds)) - int(float(start_seconds))} -i $(yt-dlp -N 8 -f 'b' -g https://www.youtube.com/watch?v={yt_id}) -ar {DEFAULT_FS} -y \"{dst_dir_root}/{yt_id}.mp4\"")
+            print(f"ffmpeg -ss {start_seconds} -t {int(float(end_seconds)) - int(float(start_seconds))} -i $(yt-dlp -f 'b' https://www.youtube.com/watch?v={yt_id}) -ar {DEFAULT_FS} -y \"{dst_dir_root}/{yt_id}.mp4\"")
+            os.system(f"ffmpeg -ss {start_seconds} -t {int(float(end_seconds)) - int(float(start_seconds))} -i $(yt-dlp -f 'b' https://www.youtube.com/watch?v={yt_id}) -ar {DEFAULT_FS} -y \"{dst_dir_root}/{yt_id}.mp4\"")
 
 
 def download_all(args, start_from_row_n):
@@ -78,10 +82,13 @@ def download_all(args, start_from_row_n):
         for index, row in enumerate(reader, 1):  # start the index from 1
             if index < start_from_row_n:  # if the row index is less than n, skip
                 continue
-            yt_id, start_seconds, end_seconds, _ = row  # extract the necessary data from each row
+            yt_id = row[0]
+            start_seconds = row[1]
+            end_seconds = row[2]
+            # extract the necessary data from each row
             # print command for debugging
-            print(f"ffmpeg -ss {start_seconds} -t {int(float(end_seconds)) - int(float(start_seconds))} -i $(yt-dlp -N 4 -f 'b' -g https://www.youtube.com/watch?v={yt_id}) -ar {DEFAULT_FS} -y \"{dst_dir_root}/{yt_id}.mp4\"")
-            os.system(f"ffmpeg -ss {start_seconds} -t {int(float(end_seconds)) - int(float(start_seconds))} -i $(yt-dlp -N 4 -f 'b' -g https://www.youtube.com/watch?v={yt_id}) -ar {DEFAULT_FS} -y \"{dst_dir_root}/{yt_id}.mp4\"")
+            print(f"ffmpeg -ss {start_seconds} -t {int(float(end_seconds)) - int(float(start_seconds))} -i $(yt-dlp -vU -4 -f 'b' -g https://www.youtube.com/watch?v={yt_id}) -ar {DEFAULT_FS} -y \"{dst_dir_root}/{yt_id}.mp4\"")
+            os.system(f"ffmpeg -ss {start_seconds} -t {int(float(end_seconds)) - int(float(start_seconds))} -i $(yt-dlp -vU -4 -f 'b' -g https://www.youtube.com/watch?v={yt_id}) -ar {DEFAULT_FS} -y \"{dst_dir_root}/{yt_id}.mp4\"")
 
 
 def download(class_name, args):

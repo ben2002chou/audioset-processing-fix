@@ -59,7 +59,7 @@ def download_all_multithreaded(args, start_from_row_n, offset):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('mode', type=str, choices=['find', 'download', 'download-all', 'download-all-multithreaded'])
-    parser.add_argument('--offset', type=int, required=True, help='Offset value for distributing the rows (0-8).')
+    parser.add_argument('--offset', type=int, required=True, help='Offset value for distributing the rows (0-9).')
     parser.add_argument('-c', '--classes', nargs='+', type=str,
                         help='list of classes to find in a given directory of audioset files')
     parser.add_argument('-b', '--blacklist', nargs='+', type=str,
@@ -79,7 +79,7 @@ if __name__ == '__main__':
 
     parser.set_defaults(
         label_file='./data/class_labels_indices.csv',
-        csv_dataset='./data/unbalanced_train_segments.csv',
+        csv_dataset='./data/unbalanced_train_segments_missing.csv',
         destination_dir='/grand/EVITA/ben/AudioSet/unbalanced/videos',
         exp_dir='/grand/EVITA/ben/AudioSet/videos',
         fs=16000
@@ -100,12 +100,12 @@ if __name__ == '__main__':
     elif args.mode == 'download-all':
         if args.destination_dir is not None and not os.path.isdir(args.destination_dir):
             os.makedirs(args.destination_dir)
-        download_all(args, 0)
+        download_all(args, 600000)
 
     elif args.mode == 'download-all-multithreaded':
         if args.destination_dir is not None and not os.path.isdir(args.destination_dir):
             os.makedirs(args.destination_dir)
-        download_all_multithreaded(args, 1000000, args.offset)
+        download_all_multithreaded(args, 600000, args.offset)
 
 #ffmpeg -ss 0 -t 10 -i $(yt-dlp -f 'b' -g https://www.youtube.com/watch?v=--4gqARaEJE) -ar 16000 -y "/grand/EVITA/ben/AudioSet/eval/videos/--4gqARaEJE.mp4"
 

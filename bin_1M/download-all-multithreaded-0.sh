@@ -5,7 +5,7 @@ module load conda
 conda activate youtubedl
 cd /home/ben2002chou/code/audioset-processing-fix
 # Run your Python script within the activated environment
-python3 process_unbalanced_1M.py download-all-multithreaded --offset 0 
+python3 process_unbalanced_1M.py download-all-multithreaded --offset 0 > output_log.txt
 conda deactivate
 cd /home/ben2002chou/code/cav-mae
 source cavmae1017/bin/activate
