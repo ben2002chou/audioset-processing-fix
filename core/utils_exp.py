@@ -57,9 +57,15 @@ def download_all_multithreaded(args, start_from_row_n, offset):
             end_seconds = row[2]
             print(f'yt_id: {yt_id}, start_seconds: {start_seconds}, end_seconds: {end_seconds}')
             # extract the necessary data from each row
+            file_path = f"{dst_dir_root}/{yt_id}.mp4"
+        
+            if os.path.exists(file_path):
+                print(f"File {file_path} already exists, skipping download and processing.")
+                continue  # skip to the next iteration if the file already exists
+            
             # print command for debugging
-            print(f"ffmpeg -ss {start_seconds} -t {int(float(end_seconds)) - int(float(start_seconds))} -i $(yt-dlp -f 'b' https://www.youtube.com/watch?v={yt_id}) -ar {DEFAULT_FS} -y \"{dst_dir_root}/{yt_id}.mp4\"")
-            os.system(f"ffmpeg -ss {start_seconds} -t {int(float(end_seconds)) - int(float(start_seconds))} -i $(yt-dlp -f 'b' https://www.youtube.com/watch?v={yt_id}) -ar {DEFAULT_FS} -y \"{dst_dir_root}/{yt_id}.mp4\"")
+            print(f"ffmpeg -ss {start_seconds} -t {int(float(end_seconds)) - int(float(start_seconds))} -i $(yt-dlp -f 'b' -g https://www.youtube.com/watch?v={yt_id}) -ar {DEFAULT_FS} -y \"{dst_dir_root}/{yt_id}.mp4\"")
+            os.system(f"ffmpeg -ss {start_seconds} -t {int(float(end_seconds)) - int(float(start_seconds))} -i $(yt-dlp -f 'b' -g https://www.youtube.com/watch?v={yt_id}) -ar {DEFAULT_FS} -y \"{dst_dir_root}/{yt_id}.mp4\"")
 
 
 def download_all(args, start_from_row_n):
@@ -286,3 +292,4 @@ if __name__ == '__main__':
 
     find_files(youtube_ids, args.raw_audio_dir, args.destination_dir)
 """
+
