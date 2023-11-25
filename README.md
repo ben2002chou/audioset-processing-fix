@@ -66,13 +66,15 @@ audioset-processing
 ├── data
 |   ├── balanced_train_segments.csv
 |   ├── class_labels_indices.csv
-|   ├── unbalanced_train_segments.csv
+|   ├── unbalanced_train_segments.csv # Need to redownload
 |   └── eval_segments.csv
 ├── src
 |   └── pictures
 ├── demo.ipynb
 ├── LICENCE
 ├── process.py
+├── process_eval.py
+├── process_unbalanced.py
 ├── requirements.txt
 └── README.md
 ```
