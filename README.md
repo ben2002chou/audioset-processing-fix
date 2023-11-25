@@ -1,12 +1,10 @@
-# AudioSet Processing Fix
-
-Welcome to the `audioset-processing-fix` repository, a toolkit built as an extension and refinement of the `audioset-processing` project by Aoife McDonagh. This repository aims to address specific challenges in processing and managing the AudioSet dataset, particularly focusing on downloading raw audio files, finding missing files, removing corrupted files, and filtering dataset entries.
+# AudioSet Download + Processing 
 
 ## Introduction
 
-The AudioSet dataset, created by Google, is a large-scale collection of audio clips drawn from YouTube videos, annotated with a wide range of sound labels. While the original `audioset-processing` project provided a robust method for downloading and managing these audio files, the `audioset-processing-fix` repository enhances this functionality by offering additional scripts for dataset cleaning and integrity checks.
+This repo is created for reproducing CAV-MAE. It helps download audioset and removed unused and corrupted videos.
 
-## Repository Structure
+## Additions
 
 This repository contains several Python scripts, each serving a specific purpose in the data processing pipeline:
 - `clean_unbalanced_regex.py`: Reformats unbalanced data CSV file so that it works with this repo
@@ -27,7 +25,7 @@ To get started with the `audioset-processing-fix` toolkit, clone the repository 
 
 ```bash
 git clone https://github.com/ben2002chou/audioset-processing-fix.git
-cd audioset-processing-fix
+cd audioset-processing-fix/bin
 ```
 
 Each script can be run from the command line. For example, to identify missing .mp4 video files, use:
