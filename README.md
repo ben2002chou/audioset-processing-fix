@@ -9,7 +9,7 @@ The AudioSet dataset, created by Google, is a large-scale collection of audio cl
 ## Repository Structure
 
 This repository contains several Python scripts, each serving a specific purpose in the data processing pipeline:
-
+- `clean_unbalanced_regex.py`: Reformats unbalanced data CSV file so that it works with this repo
 - `find_missing_files.py`: Identifies missing audio or video files in the dataset.
 - `remove_union.py`: Removes entries present in one CSV file that also appear in another.
 - `remove_corrupted_files.py`: Deletes corrupted or invalid files from a specified directory.
