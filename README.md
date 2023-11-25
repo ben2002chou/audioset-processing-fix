@@ -60,6 +60,11 @@ AudioSet can be downloaded from Google [here](https://research.google.com/audios
 ## Structure
 ```
 audioset-processing
+├── bin
+|   ├── download-all-eval.sh
+|   ├── download-all-unbalanced.sh
+|   ├── download-all.sh
+|   └── download.sh
 ├── core
 |   ├── utils.py
 |   └── download.sh
