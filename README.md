@@ -14,8 +14,10 @@ This repository contains several Python scripts, each serving a specific purpose
 - `remove_union.py`: Removes entries present in one CSV file that also appear in another.
 - `remove_corrupted_files.py`: Deletes corrupted or invalid files from a specified directory.
 - `filter_json.py`: Filters entries in a JSON file based on the existence of corresponding video files in a directory.
-
-These scripts are designed for ease of use and can be run from the command line with customizable arguments for specific file paths and other parameters.
+- `update_datafiles.py`: Updates training datafiles (json format) after removal of corrupted files
+  
+Running remove_corrupted_missing.sh will remove all videos that are corrupted and cannot be extracted.
+You have to change the file directories to your own.
 
 
 
