@@ -1,5 +1,44 @@
-# audioset-processing [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/aoifemcdonagh/audioset-processing/blob/master/demo.ipynb)
-Toolkit for downloading raw audio files from AudioSet.
+# AudioSet Processing Fix
+
+Welcome to the `audioset-processing-fix` repository, a toolkit built as an extension and refinement of the `audioset-processing` project by Aoife McDonagh. This repository aims to address specific challenges in processing and managing the AudioSet dataset, particularly focusing on downloading raw audio files, finding missing files, removing corrupted files, and filtering dataset entries.
+
+## Introduction
+
+The AudioSet dataset, created by Google, is a large-scale collection of audio clips drawn from YouTube videos, annotated with a wide range of sound labels. While the original `audioset-processing` project provided a robust method for downloading and managing these audio files, the `audioset-processing-fix` repository enhances this functionality by offering additional scripts for dataset cleaning and integrity checks.
+
+## Repository Structure
+
+This repository contains several Python scripts, each serving a specific purpose in the data processing pipeline:
+
+- `find_missing_files.py`: Identifies missing audio or video files in the dataset.
+- `remove_union.py`: Removes entries present in one CSV file that also appear in another.
+- `remove_corrupted_files.py`: Deletes corrupted or invalid files from a specified directory.
+- `filter_json.py`: Filters entries in a JSON file based on the existence of corresponding video files in a directory.
+
+These scripts are designed for ease of use and can be run from the command line with customizable arguments for specific file paths and other parameters.
+
+
+
+## Quick Start
+
+To get started with the `audioset-processing-fix` toolkit, clone the repository and navigate to its directory:
+
+```bash
+git clone https://github.com/ben2002chou/audioset-processing-fix.git
+cd audioset-processing-fix
+```
+
+Each script can be run from the command line. For example, to identify missing .mp4 video files, use:
+
+```bash
+python find_missing_files.py <input_csv_path> <output_csv_path> <directory_path> .mp4
+```
+
+Replace the placeholders with appropriate file paths and extensions.
+
+## Usage
+
+Detailed usage instructions for each script are available at the beginning of the script files. Ensure you have the necessary files and directories set up as per the requirements of each script.
 
 ## Dependencies
 - python3
@@ -8,29 +47,12 @@ Toolkit for downloading raw audio files from AudioSet.
 
 ## Quick start
 
-To download files from AudioSet for class "bird" 
+To download files from AudioSet
 ```	
-python3 process.py download -c "bird"
+python3 process.py 
 ```
-Downloads audio files to a folder `output/bird` in current directory.
-
 Uses CSV files found in `data/` by default. Execute `process.py` in its' own directory.
 
-## process.py Arguments
-The following options control how the toolkit operates. The first list of options are the most useful. The second list of options aren't necessary to use but offer more fine grained control if desired.
-
-#### Most useful
-- Mode: `download` or `find`
-- `-c` or `--classes` List of classes to download (or find). Use quotation marks for class names with spaces, e.g. `"bird song"`. For multiple classes use format `"bird" "flute" "dog" ...` 
-- `-d` or `--destination_dir` Path to directory for storing downloaded (or found) files. Defaults to `./output`
-- `--audio_data_dir` Path to directory containing pre-downloaded AudioSet files. Must be used in `find` mode.
-
-#### Less used
-- `-b` or `--blacklist` List of class labels which will exclude a file from being downloaded/found.
-- `-fs` or `--sample_rate` Sample rate of audio to download in Hz (not kHz!!). Default is 16000Hz
-- `-s` or `--strict` If used, only download/find classes which match exact string arguments passed, i.e. no substring matching. For example, if you wanted to download all instances of class "bird" but not "bird song".
-- `--label_file` Path to CSV file containing AudioSet labels for each class. Defaults to `./data/class_labels_indices.csv` 
-- `--csv_dataset` Path to CSV file containing AudioSet in YouTube-ID/timestamp/class form. Defaults to `./data/balanced_train_segments.csv`
 
 ## Project Overview
 This toolkit was developed as part of a project for my Master's thesis. This project involved training a WaveGAN model on subsets of the AudioSet dataset.  
@@ -85,3 +107,16 @@ audioset-processing
 ├── requirements.txt
 └── README.md
 ```
+## Acknowledgments
+
+- Aoife McDonagh for the original `audioset-processing` project.
+- Google for creating and maintaining the AudioSet dataset.
+
+  
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file in the original `audioset-processing` repository for details.
+
+---
+
+This README provides a brief overview of the `audioset-processing-fix` repository. For more detailed information about the original project, visit [audioset-processing](https://github.com/aoifemcdonagh/audioset-processing).
