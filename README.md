@@ -64,6 +64,12 @@ audioset-processing
 |   ├── download-all-eval.sh
 |   ├── download-all-unbalanced.sh
 |   ├── download-all.sh
+|   ├── extract-balanced.sh
+|   ├── extract-eval.sh
+|   ├── extract-unbalanced_audio.sh
+|   ├── extract-unbalanced_video.sh
+|   ├── download-all.sh
+|   ├── download-all.sh
 |   └── download.sh
 ├── core
 |   ├── utils.py
