@@ -60,7 +60,7 @@ AudioSet can be downloaded from Google [here](https://research.google.com/audios
 ## Structure
 ```
 audioset-processing
-├── procas
+├── core
 |   ├── utils.py
 |   └── download.sh
 ├── data
