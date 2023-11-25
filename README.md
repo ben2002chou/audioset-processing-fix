@@ -49,7 +49,7 @@ Detailed usage instructions for each script are available at the beginning of th
 
 To download files from AudioSet
 ```	
-python3 process.py 
+bash download-all.sh
 ```
 Uses CSV files found in `data/` by default. Execute `process.py` in its' own directory.
 
