@@ -53,6 +53,10 @@ bash download-all.sh
 ```
 Uses CSV files found in `data/` by default. Execute `process.py` in its' own directory.
 
+To clean data
+```	
+bash remove_corrupted_missing.sh
+```
 
 ## AudioSet
 AudioSet can be downloaded from Google [here](https://research.google.com/audioset/download.html) as a set of CSV files. For each element in the dataset the CSV files list an associated YouTube ID, start time, end time and class labels. The CSV files are used to download AudioSet as raw audio files (WAV).
