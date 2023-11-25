@@ -100,12 +100,12 @@ if __name__ == '__main__':
     elif args.mode == 'download-all':
         if args.destination_dir is not None and not os.path.isdir(args.destination_dir):
             os.makedirs(args.destination_dir)
-        download_all(args, 600000)
+        download_all(args, 300000)
 
     elif args.mode == 'download-all-multithreaded':
         if args.destination_dir is not None and not os.path.isdir(args.destination_dir):
             os.makedirs(args.destination_dir)
-        download_all_multithreaded(args, 600000, args.offset)
+        download_all_multithreaded(args, 300000, args.offset)
 
 #ffmpeg -ss 0 -t 10 -i $(yt-dlp -f 'b' -g https://www.youtube.com/watch?v=--4gqARaEJE) -ar 16000 -y "/grand/EVITA/ben/AudioSet/eval/videos/--4gqARaEJE.mp4"
 

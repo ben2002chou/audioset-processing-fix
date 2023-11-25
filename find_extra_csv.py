@@ -1,9 +1,9 @@
 import csv
 import os
 
-input_csv_path = 'data/balanced_train_segments.csv'  # replace with the path to your input CSV
-extra_videos_csv_path = 'data/balanced_train_segments_extra.csv'  # replace with the path to your output CSV
-directory_path = '/grand/EVITA/ben/AudioSet/balanced/videos'  # replace with the path to the directory where you're checking for files
+input_csv_path = 'data/unbalanced_train_segments.csv'  # replace with the path to your input CSV
+extra_videos_csv_path = 'data/unbalanced_train_segments_extra.csv'  # replace with the path to your output CSV
+directory_path = '/grand/EVITA/ben/AudioSet/unbalanced/videos'  # replace with the path to the directory where you're checking for files
 
 # Step 1: Create a set of all the YTIDs from the CSV file
 ytids_from_csv = set()

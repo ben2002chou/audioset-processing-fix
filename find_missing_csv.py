@@ -2,11 +2,11 @@ import csv
 import os
 
 input_csv_path = 'data/unbalanced_train_segments.csv'  # replace with the path to your input CSV
-output_csv_path = 'data/unbalanced_train_segments_missing.csv'  # replace with the path to your output CSV
-directory_path = '/grand/EVITA/ben/AudioSet/unbalanced/videos'  # replace with the path to the directory where you're checking for files
+output_csv_path = 'data/unbalanced_train_segments_missing_extraction.csv'  # replace with the path to your output CSV
+directory_path = '/grand/EVITA/ben/AudioSet/unbalanced/audio_samples'  # replace with the path to the directory where you're checking for files
 
 def file_exists(ytid):
-    file_path = os.path.join(directory_path, f'{ytid}.mp4')
+    file_path = os.path.join(directory_path, f'{ytid}.wav')
     return os.path.isfile(file_path)
 
 with open(input_csv_path, newline='', encoding='utf-8') as infile, open(output_csv_path, 'w', newline='', encoding='utf-8') as outfile:

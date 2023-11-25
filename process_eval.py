@@ -78,7 +78,7 @@ if __name__ == '__main__':
 
     parser.set_defaults(
         label_file='./data/class_labels_indices.csv',
-        csv_dataset='./data/eval_segments.csv',
+        csv_dataset='./data/eval_segments_missing_extraction_dif.csv',
         destination_dir='/grand/EVITA/ben/AudioSet/eval/videos',
         exp_dir='/grand/EVITA/ben/AudioSet/videos',
         fs=16000
