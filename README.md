@@ -72,9 +72,9 @@ audioset-processing
 |   └── pictures
 ├── demo.ipynb
 ├── LICENCE
-├── process.py
-├── process_eval.py
-├── process_unbalanced.py
+├── process.py # download balanced videos
+├── process_eval.py # download evaluation videos
+├── process_unbalanced.py # download unbalanced videos
 ├── requirements.txt
 └── README.md
 ```
