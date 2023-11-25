@@ -25,6 +25,7 @@ To get started with the `audioset-processing-fix` toolkit, clone the repository 
 
 ```bash
 git clone https://github.com/ben2002chou/audioset-processing-fix.git
+git clone https://github.com/ben2002chou/cav-mae.git
 cd audioset-processing-fix/bin
 ```
 
