@@ -54,37 +54,6 @@ python3 process.py
 Uses CSV files found in `data/` by default. Execute `process.py` in its' own directory.
 
 
-## Project Overview
-This toolkit was developed as part of a project for my Master's thesis. This project involved training a WaveGAN model on subsets of the AudioSet dataset.  
-
-AudioSet is publicly available in two formats; as a list of YouTube-IDs structured as CSV files, or as 128-dimensional feature vectors stored as TFRecord files.
-Neither of these formats could be used as training data for the model I was trying to train.
-* The problem with using the dataset's audio feature vectors is that in general, audio feature representations are not invertible.
-* The problem with using YouTube-IDs is that they are only references to where the audio can be found online, not the samples themselves.
-
-However, using these identifiers is the only way to obtain raw audio to train a WaveGAN model for this project. 
-Gathering all samples for an entire class would take an extremely long time and be prone to human error. It would involve a number of lengthy steps which would have to be repeated every time a new data needed to be downloaded;  
-1. Parsing the CSV dataset for samples labelled with corresponding class identifier 
-
-2. Storing YouTube-IDs labelled with class identifier. 
-
-3. Putting all IDs into a separate URL addresses. 
-
-4. Downloading YouTube video from which a sample originated 
-
-5. Extract audio, discard video stream. 
-
-6. Using timestamp information in CSV file to retrieve sample. 
-
-7. Storing sample on local machine.  
-
-Since these steps are repeatable for downloading any target class in AudioSet, it made sense to automate this process. A toolkit for downloading the raw audio samples in AudioSet was developed to solve this problem. The toolkit comprises of a set of Python scripts for taking user input, parsing through the dataset, and downloading the relevant audio clips.  
-
-#### Downloading
-To download a sub-set of AudioSet, the user can specify target classes they wish to download. Then the csv files distributed for the dataset are parsed for all YouTube-IDs which have a label associated with the given class. Using a number of Python packages, URLs are formed with the YouTube-IDs. Ten second audio clips are downloaded using the generated URLs and corresponding timestamps for each video. Clips are stored locally on the user's machine for future use.  
-
-![alt text](https://github.com/aoifemcdonagh/audioset-processing/blob/master/src/pictures/audioset-processing-download.png "Download flowchart")
-
 ## AudioSet
 AudioSet can be downloaded from Google [here](https://research.google.com/audioset/download.html) as a set of CSV files. For each element in the dataset the CSV files list an associated YouTube ID, start time, end time and class labels. The CSV files are used to download AudioSet as raw audio files (WAV).
 
