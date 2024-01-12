@@ -22,17 +22,10 @@ for video_id in os.listdir(root_directory_path):
                 f for f in os.listdir(stems_audio_path) if f.endswith(".wav")
             ]
             midi_files = [f for f in os.listdir(stems_midi_path) if f.endswith(".mid")]
-            root_audio_files = [
-                f for f in os.listdir(video_id_path) if f.endswith(".wav")
-            ]
-            root_midi_files = [
-                f for f in os.listdir(video_id_path) if f.endswith(".mid")
-            ]
-            labels = []
+
             # Pair and process files
             for audio_file in audio_files:
                 label = audio_file.split("_")[1].split(".")[0]  # Extract label
-                labels.append(label)
                 midi_file = f"{audio_file.split('.')[0]}.mid"  # Corresponding midi file
 
                 if midi_file in midi_files:
@@ -44,27 +37,13 @@ for video_id in os.listdir(root_directory_path):
                         "wav2": os.path.join(stems_midi_path, midi_file),
                     }
                     data_entries.append(entry)
-            # mixed audio and midi files
-            for audio_file in root_audio_files:
-                joined_labels = ", ".join(labels)
-                midi_file = f"{audio_file.split('.')[0]}.mid"
-
-                if midi_file in root_midi_files:
-                    entry = {
-                        "video_id": video_id,
-                        "video_path": "arbitrary/path",  # Assign an arbitrary path or modify as needed
-                        "labels": joined_labels,  # change my code so it works
-                        "wav1": os.path.join(video_id_path, audio_file),
-                        "wav2": os.path.join(video_id_path, midi_file),
-                    }
-                    data_entries.append(entry)
 
 # Create the final structure
 json_structure = {"data": data_entries}
 
 # Write to JSON file
 output_json_path = (
-    "/home/ben2002chou/code/cav-mae/data/cocochorals/cocochorals_valid_trial.json"
+    "/home/ben2002chou/code/cav-mae/data/cocochorals/cocochorals_valid.json"
 )
 with open(output_json_path, "w") as outfile:
     json.dump(json_structure, outfile, indent=4)

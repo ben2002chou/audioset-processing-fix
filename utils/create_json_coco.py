@@ -3,11 +3,36 @@ import json
 
 # Define your root directory path here
 root_directory_path = (
-    "/grand/EVITA/ben/cocochorales/cocochorales_full/main_dataset/valid"
+    "/grand/EVITA/ben/cocochorales/cocochorales_full/main_dataset/test"
 )
 
 # This will store all your data entries
 data_entries = []
+
+# Class names and their corresponding machine IDs
+class_to_machine_id = {
+    "trumpet": "/instrument/00000",
+    "horn": "/instrument/00001",
+    "trombone": "/instrument/00002",
+    "tuba": "/instrument/00003",
+    "flute": "/instrument/00004",
+    "oboe": "/instrument/00005",
+    "clarinet": "/instrument/00006",
+    "bassoon": "/instrument/00007",
+    "violin": "/instrument/00008",
+    "viola": "/instrument/00009",
+    "cello": "/instrument/00010",
+    "saxophone": "/instrument/00011",
+    "double bass": "/instrument/00012",
+}
+
+
+# Function to replace class names with machine IDs
+def replace_class_names_with_ids(labels_list, class_to_id_mapping):
+    return [
+        class_to_id_mapping.get(label.strip(), label.strip()) for label in labels_list
+    ]
+
 
 # Traverse through the directory
 for video_id in os.listdir(root_directory_path):
@@ -39,21 +64,27 @@ for video_id in os.listdir(root_directory_path):
                     entry = {
                         "video_id": video_id,
                         "video_path": "arbitrary/path",  # Assign an arbitrary path or modify as needed
-                        "labels": label,
+                        "labels": class_to_machine_id.get(
+                            label, label
+                        ),  # Replace class name with machine ID
                         "wav1": os.path.join(stems_audio_path, audio_file),
                         "wav2": os.path.join(stems_midi_path, midi_file),
                     }
                     data_entries.append(entry)
             # mixed audio and midi files
             for audio_file in root_audio_files:
-                joined_labels = ", ".join(labels)
+                joined_labels = ",".join(labels)
+                updated_labels = replace_class_names_with_ids(
+                    joined_labels.split(","), class_to_machine_id
+                )
+                joined_updated_labels = ",".join(updated_labels)
                 midi_file = f"{audio_file.split('.')[0]}.mid"
 
                 if midi_file in root_midi_files:
                     entry = {
                         "video_id": video_id,
                         "video_path": "arbitrary/path",  # Assign an arbitrary path or modify as needed
-                        "labels": joined_labels,  # change my code so it works
+                        "labels": joined_updated_labels,  # Labels replaced with machine IDs
                         "wav1": os.path.join(video_id_path, audio_file),
                         "wav2": os.path.join(video_id_path, midi_file),
                     }
@@ -64,7 +95,7 @@ json_structure = {"data": data_entries}
 
 # Write to JSON file
 output_json_path = (
-    "/home/ben2002chou/code/cav-mae/data/cocochorals/cocochorals_valid_trial.json"
+    "/home/ben2002chou/code/cav-mae/data/cocochorals/cocochorals_test_trial.json"
 )
 with open(output_json_path, "w") as outfile:
     json.dump(json_structure, outfile, indent=4)

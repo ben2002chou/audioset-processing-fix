@@ -34,3 +34,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     combine_json_files(args.input_file1, args.input_file2, args.output_file)
+
+# python combine_json.py /home/ben2002chou/code/cav-mae/data/audioset_eval_filtered_piano_roll.json /home/ben2002chou/code/cav-mae/data/cocochorals/cocochorals_valid_h5.json /home/ben2002chou/code/cav-mae/data/cocochorals/audioset_eval_cocochorals_valid_h5.json
